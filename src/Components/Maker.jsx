@@ -1,33 +1,30 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
 
-const MakerComponent = ({ text }) => {
-  function changeStyle(e) {
-    e.target.style.background = "red";
-    e.target.style.transform = "translate(-50%, -50%) scale(1.2)";
-  }
+import markerIcon from "../icon/icons8-marker-40.png";
 
-  function onMouseOff(e) {
-    e.target.style.background = "grey";
-    e.target.style.transform = "translate(-50%, -50%)";
+const MakerComponent = ({ text, googleMapUrl }) => {
+  function openInNewTab(url) {
+    var win = window.open(url, "_blank");
+    win.focus();
   }
 
   return (
-    <div
-      onMouseOver={changeStyle}
-      onMouseOut={onMouseOff}
-      style={{
-        color: "white",
-        background: "grey",
-        padding: "15px 10px",
-        display: "inline-flex",
-        textAlign: "center",
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: "100%",
-        transform: "translate(-50%, -50%)",
-        transitionDuration: "200ms",
-      }}>
-      {text}
+    <div className='maker'>
+      <img
+        src={markerIcon}
+        alt='Logo'
+        data-tip={text}
+        onClick={() => googleMapUrl && openInNewTab(googleMapUrl)}
+        style={{
+          height: "30px",
+          width: "30px",
+          transform: "translate(-50%, -50%)",
+          transitionDuration: "200ms",
+          cursor: "pointer",
+        }}
+      />
+      <ReactTooltip multiline={true} />
     </div>
   );
 };
